@@ -5,15 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>달력</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #0077b6;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            z-index:1000;
+        }
+
+        header .logo h1 {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
+        }
+        .content {
+            margin-top:80px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            align-items:center;
+            min-height:calc(100vh-80px)
         }
         .calendar {
             width: 90%;
@@ -22,6 +67,7 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px
         }
         .calendar-header {
             background-color: #007bff;
@@ -106,13 +152,28 @@
     </style>
 </head>
 <body>
-    <div class="calendar">
-        <div class="calendar-header">
-            <button onclick="changeMonth(-1)">◀</button>
-            <h2 id="monthYear"></h2>
-            <button onclick="changeMonth(1)">▶</button>
+    <header>
+        <div class="logo">
+            <h1><a href="oss.html"; style="color: white; text-decoration: none;">CAU어쩌고</a></h1>
         </div>
-        <div class="calendar-body" id="calendarDays"></div>
+        <nav>
+          <ul>
+            <li><a href="contest.html">공모전</a></li>
+            <li><a href="scholarship.html">장학금</a></li>
+            <li><a href="calendar.html">캘린더</a></li>
+          </ul>
+        </nav>
+    </header>
+    
+    <div class="content">
+        <div class="calendar">
+            <div class="calendar-header">
+                <button onclick="changeMonth(-1)">◀</button>
+                <h2 id="monthYear"></h2>
+                <button onclick="changeMonth(1)">▶</button>
+            </div>
+            <div class="calendar-body" id="calendarDays"></div>
+        </div>
     </div>
 
     <div class="event-details" id="eventDetails">
