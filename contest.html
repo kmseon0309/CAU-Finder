@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공모전 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #0077b6;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        
+      .contest-list {
+          max-width: 1000px;
+          margin: auto;
+      }
+      .contest-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px;
+          margin-bottom: 15px;
+          background-color: white;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 18px;
+      }
+
+      .button-group {
+          display: flex;
+          gap: 10px;
+      }
+
+      .add-button, .apply-button {
+          font-size: 16px;
+          padding: 10px 15px;
+          border-radius: 6px;
+          cursor: pointer;
+      }
+
+      .add-button {
+          background-color: #007bff;
+          color: white;
+          border: none;
+      }
+
+      .apply-button {
+          background-color: #0056b3;
+          color: white;
+          border: none;
+      }
+
+      .category-button {
+          font-size: 16px;
+          padding: 8px 8px;
+          border-radius: 6px;
+          cursor: pointer;
+          margin-right: 8px;
+      }
+    
+      .category-button.active {
+          background-color: #0056b3;
+          color: white;
+      }
+
+      button, a {
+          transition: all 0.3s ease;
+      }
+
+      button:hover, a:hover {
+          opacity: 0.9;
+      }
+
+      section {
+        background-color: #cbe2ff;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 10px
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <h1>CAU어쩌고</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="oss.html">홈</a></li>
+            <li><a href="contest.html">공모전</a></li>
+            <li><a href="scholarship.html">장학금</a></li>
+            <li><a href="calendar.html">캘린더</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h1>공모전 목록</h1>
+        <button class="category-button active" onclick="filterContests('all')">통합</button>
+        <button class="category-button" onclick="filterContests('seoul')">서울</button>
+        <button class="category-button" onclick="filterContests('davinci')">다빈치</button>
+    </section>
+
+    <div class="contest-list" id="contestList"></div>
+    <p style="text-align: right; margin-right: 450px;">
+        <button onclick="goToCalendar()">달력 보기</button>
+    </p>
+
+    <script>
+        const contests = {
+            all: [
+                { name: "2024학년도 CAU e-Advisor 학생 활용 수기 공모전", deadline: "2024-12-31", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=1&lecturegroupid=6250", category: "all" },
+                { name: "2024년 건설대학원 학술대회", deadline: "2024-12-16", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=2&lecturegroupid=6288", category: "all" },
+                { name: "2024 전국 대학 연합 본 글로벌 혁신인재육성 프로젝트", deadline: "2024-12-8", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=1&lecturegroupid=6216", category: "all" },
+                { name: "2024 CAU 아이디어 공모전 「언박싱데이」(창업 아이디어 경진대회) 모집 공고", deadline: "2024-12-8", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=2&lecturegroupid=6191", category: "all" },
+                { name: "[대학혁신지원사업] 2024 중앙인 성장스토리 영상 공모전", deadline: "2024-12-8", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=1&lecturegroupid=6158", category: "all" },
+                { name: "[LINC 3.0] 유럽문화학부 제 2차 창업아이디어경진대회", deadline: "2024-11-28", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=4&lecturegroupid=6289", category: "all" },
+                { name: "[LINC 3.0] AIDT활용 창업아이디어 발굴 '청춘공간캠프 EDGE'", deadline: "2024-11-15", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=4&lecturegroupid=6097", category: "all"},
+                { name: "2024 중앙헤럴드 제45회 영어수필대회", deadline: "2024-11-7", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28326&pageNo=1", category: "all"},
+                { name: "[학생성장지원사업] 2024학년도 간호학과 4학년 학생 포토폴리오 경진 대회", deadline: "2024-11-1", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=4&lecturegroupid=6029", category: "all"},
+                { name: "[LINC 3.0] 유럽문화학부 제 1차 창업아이디어경진대회", deadline: "2024-10-10", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=7&lecturegroupid=6145", category: "all"},
+                { name: "[교수학습개발센터] 2024학년도 데이터 분석 공모전", deadline: "2024-10-4", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=6&lecturegroupid=6219", category: "all"}
+            ],
+
+            seoul: [
+                { name: "생성형 AI 활용 물류경진대회", deadline: "2024-10-27", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=5&lecturegroupid=6000", category: "seoul" },
+                { name: "2024학년도 사범대학 모의수업 경진대회", deadline: "2025-9-10", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=&searchselect=&pagesize=10&viewtype=L&currentpage=6&lecturegroupid=5846", category: "seoul" },
+            ],
+            davinci: [
+                { name: "장애학생지원센터(다빈치)와 함께하는 ECO 환경보호 그린 캠페인 에코백 실크 스크린 프로그램 참여자 모집", deadline: "2024-9-18", applyLink: "https://rainbow.cau.ac.kr/site/reservation/lecture/lectureDetail?reservegroupid=1&menuid=001002002&submode=lecture&reserveprogramid=L&searchstatus=&searchlearnsystem=&searchcore=&searchcategorytype=LE03&searchmileagepay=&searchtext=다빈치&searchselect=&pagesize=10&viewtype=L&currentpage=2&lecturegroupid=4627", category: "davinci" },
+            ],
+        };
+
+        const contestList = document.getElementById('contestList');
+        const savedContests = JSON.parse(localStorage.getItem('selectedContests')) || [];
+        let currentCategory = 'all';
+
+        function renderContests() {
+            contestList.innerHTML = '';
+            contests[currentCategory].forEach((contest, index) => {
+                const item = document.createElement('div');
+                item.classList.add('contest-item');
+
+                const nameContainer = document.createElement('div');
+                nameContainer.style.fontSize = '20px';
+                nameContainer.style.fontWeight = 'bold'
+                nameContainer.textContent = contest.name;
+
+                const deadlineContainer = document.createElement('div');
+                deadlineContainer.style.fontSize = '20px';
+                deadlineContainer.textContent = `(마감일: ${contest.deadline})`;
+
+                const textContainer = document.createElement('div');
+                textContainer.appendChild(nameContainer);
+                textContainer.appendChild(deadlineContainer);
+
+                const buttonGroup = document.createElement('div');
+                buttonGroup.classList.add('button-group');
+
+                const addButton = document.createElement('button');
+                addButton.textContent = savedContests.some(c => c.name === contest.name) ? "제외" : "추가";
+                addButton.classList.add('add-button');
+                addButton.onclick = () => toggleContest(index);
+
+                const applyButton = document.createElement('a');
+                applyButton.href = contest.applyLink;
+                applyButton.target = "_blank";
+                applyButton.classList.add('apply-button');
+                applyButton.textContent = "신청하기";
+
+                buttonGroup.appendChild(applyButton);
+                buttonGroup.appendChild(addButton);
+
+                item.appendChild(textContainer); 
+                item.appendChild(buttonGroup);
+                contestList.appendChild(item);
+            });
+        }
+
+        function toggleContest(index) {
+            const contest = contests[currentCategory][index];
+            const savedIndex = savedContests.findIndex(c => c.name === contest.name);
+
+            if (savedIndex > -1) {
+                savedContests.splice(savedIndex, 1);
+            } else {
+                savedContests.push(contest);
+            }
+
+            localStorage.setItem('selectedContests', JSON.stringify(savedContests));
+            renderContests();
+        }
+
+        function filterContests(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelector(`button[onclick="filterContests('${category}')"]`).classList.add('active');
+            renderContests();
+        }
+
+        function goToCalendar() {
+            window.location.href = 'calendar.html';
+        }
+
+        renderContests();
+    </script>
+</body>
+</html>

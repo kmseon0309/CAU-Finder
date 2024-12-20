@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장학금 목록</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #0077b6;
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo h1 {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+      .scholarship-list {
+          max-width: 1000px;
+          margin: auto;
+      }
+      .scholarship-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px;
+          margin-bottom: 15px;
+          background-color: white;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 18px;
+      }
+
+      .button-group {
+          display: flex;
+          gap: 10px;
+      }
+
+      .add-button, .apply-button {
+          font-size: 16px;
+          padding: 10px 15px;
+          border-radius: 6px;
+          cursor: pointer;
+      }
+
+      .add-button {
+          background-color: #007bff;
+          color: white;
+          border: none;
+      }
+
+      .apply-button {
+          background-color: #0056b3;
+          color: white;
+          border: none;
+      }
+
+      .category-button {
+          font-size: 16px;
+          padding: 8px 8px;
+          border-radius: 6px;
+          cursor: pointer;
+          margin-right: 8px;
+      }
+    
+      .category-button.active {
+          background-color: #0056b3;
+          color: white
+      }
+
+      button, a {
+          transition: all 0.3s ease;
+      }
+
+      button:hover, a:hover {
+          opacity: 0.9;
+      }
+
+      section {
+        background-color: #cbe2ff;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top:10px;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <h1><a href="oss.html"; style="color: white; text-decoration: none;">CAU어쩌고</a></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="contest.html">공모전</a></li>
+            <li><a href="scholarship.html">장학금</a></li>
+            <li><a href="calendar.html">캘린더</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h1>장학금 목록</h1>
+        <button class="category-button active" onclick="filterScholarships('all')">통합</button>
+        <button class="category-button" onclick="filterScholarships('seoul')">서울</button>
+        <button class="category-button" onclick="filterScholarships('davinci')">다빈치</button>
+    </section>
+
+    <div class="scholarship-list" id="scholarshipList"></div>
+    <p style="text-align: right; margin-right: 450px;">
+        <button onclick="goToCalendar()">달력 보기</button>
+    </p>
+
+    <script>
+        const scholarships = {
+            all: [
+                { name: "2025학년도 1학기 국가장학금 및 사전장학 1차 신청 안내", Applicationdate: "2024-12-16", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28358&pageNo=1", category: "all" },
+                { name: "2024-2학기 고졸 후학습자 장학사업(희망사다리 Ⅱ유형) 신규장학생 2차 모집 선발(신청) 안내", Applicationdate: "2024-11-21", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28369&pageNo=1", category: "all" },
+                { name: "2024-2학기 일취월장 장학 사업 시행 공고", Applicationdate: "2024-9-20", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28213&pageNo=1", category: "all" },
+                { name: "2024년 2학기 요남장학회 장학생 선발 공고", Applicationdate: "2024-9-20", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28212&pageNo=1", category: "all" },
+                { name: "[교육혁신원] 2024혁신인재장학생 모집", Applicationdate: "2024-9-9", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28185&pageNo=1", category: "all" },
+                { name: "2024-2학기 중소기업 취업연계 장학금(희망사다리Ⅰ유형) 신청 안내", Applicationdate: "2024-9-2", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28164&pageNo=1", category: "all" },
+                { name: "2024-2학기 중소기업 취업연계 장학금(희망사다리Ⅰ유형) 신청 안내", Applicationdate: "2024-8-29", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28146&pageNo=1", category: "all"},
+                { name: "(통합) 2024학년도 2학기 2차 국가근로장학금 신청 안내", Applicationdate: "2024-8-14", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28107&pageNo=1", category: "all"},
+                { name: "2024년 2학기 푸른등대 기부장학금 신규장학생 선발안내", Applicationdate: "2024-7-15", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28022&pageNo=1", category: "all"},
+                { name: "[학부] 2024-2학기 교내장학금(보훈/국가시험지원/가족/중앙나래) 신청 안내", Applicationdate: "2024-7-12", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28018&pageNo=1", category: "all"},
+            ],
+
+            seoul: [
+                { name: "2024학년도 서울캠퍼스 2학기 학기중 교내외근로 국가근로장학생 선발 안내", Applicationdate: "2024-8-26", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28132&pageNo=1", category: "seoul" },
+                { name: "서울캠퍼스 2024-1학기 일취월장 장학금 선발 공고", Applicationdate: "2025-8-1", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28070&pageNo=1", category: "seoul" },
+                { name: "2024-1학기 복지장학금 시행 공고(서울캠퍼스)", Applicationdate: "2025-7-9", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28009&pageNo=1", category: "seoul" },
+                { name: "2024학년도 서울캠퍼스 하계방학 교내외근로 국가근로장학생 선발 안내", Applicationdate: "2025-6-24", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=27935&pageNo=1", category: "seoul" },
+                { name: "2024학년도 서울캠퍼스 하계방학 집중근로 국가근로장학생 선발 안내", Applicationdate: "2025-6-24", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=27934&pageNo=1", category: "seoul" },
+            ],
+            davinci: [
+                { name: "2024학년도 동계방학 다빈치캠퍼스 국가근로장학생(교내근로) 선발 안내", Applicationdate: "2024-12-16", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28434&pageNo=1", category: "davinci" },
+                { name: "2024학년도 동계방학 다빈치캠퍼스 국가근로장학생(집중근로) 선발 안내", Applicationdate: "2025-12-16", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28435&pageNo=1", category: "seoul" },
+                { name: "2024-2학기 CAU 미래설계장학금 장학생 모집 공고", Applicationdate: "2025-9-11", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28194&pageNo=1", category: "seoul" },
+                { name: "다빈치캠퍼스 2024-1학기 일취월장 장학금 선발 공고", Applicationdate: "2025-8-2", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28071&pageNo=1", category: "seoul" },
+                { name: "2024-1학기 복지장학금 시행 공고", Applicationdate: "2025-7-11", applyLink: "https://www.cau.ac.kr/cms/FR_CON/BoardView.do?MENU_ID=100&CONTENTS_NO=1&SITE_NO=2&P_TAB_NO=1&TAB_NO=&BOARD_SEQ=4&BOARD_CATEGORY_NO=&BBS_SEQ=28014&pageNo=1", category: "seoul" },
+            ],
+        };
+
+        const scholarshipList = document.getElementById('scholarshipList');
+        const savedScholarships = JSON.parse(localStorage.getItem('selectedScholarships')) || [];
+        let currentCategory = 'all';
+
+        function renderScholarships() {
+            scholarshipList.innerHTML = '';
+            scholarships[currentCategory].forEach((scholarship, index) => {
+                const item = document.createElement('div');
+                item.classList.add('scholarship-item');
+
+                const nameScholarship = document.createElement('div');
+                nameScholarship.style.fontSize = '20px';
+                nameScholarship.style.fontWeight = 'bold'
+                nameScholarship.textContent = scholarship.name;
+
+                const ApplicationdateContainer = document.createElement('div');
+                ApplicationdateContainer.style.fontSize = '20px';
+                ApplicationdateContainer.textContent = `(신청일: ${scholarship.Applicationdate})`;
+
+                const textContainer = document.createElement('div');
+                textContainer.appendChild(nameScholarship);
+                textContainer.appendChild(ApplicationdateContainer);
+
+                const buttonGroup = document.createElement('div');
+                buttonGroup.classList.add('button-group');
+
+                const addButton = document.createElement('button');
+                addButton.textContent = savedScholarships.some(s => s.name === scholarship.name) ? "제외" : "추가";
+                addButton.classList.add('add-button');
+                addButton.onclick = () => toggleScholarship(index);
+
+                const applyButton = document.createElement('a');
+                applyButton.href = scholarship.applyLink;
+                applyButton.target = "_blank";
+                applyButton.classList.add('apply-button');
+                applyButton.textContent = "신청하기";
+
+                buttonGroup.appendChild(applyButton);
+                buttonGroup.appendChild(addButton);
+
+                item.appendChild(textContainer);
+                item.appendChild(buttonGroup);
+                scholarshipList.appendChild(item);
+            });
+        }
+
+        function toggleScholarship(index) {
+            const scholarship = scholarships[currentCategory][index];
+            const savedIndex = savedScholarships.findIndex(s => s.name === scholarship.name);
+            const addButton = event.target;
+
+            if (savedIndex > -1) {
+                savedScholarships.splice(savedIndex, 1);
+                addButton.textContent = "추가";
+            } else {
+                savedScholarships.push(scholarship);
+                addButton.textContent = "제외";
+            }
+
+            localStorage.setItem('selectedScholarships', JSON.stringify(savedScholarships));
+            renderScholarships();
+        }
+
+
+        function filterScholarships(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelector(`button[onclick="filterScholarships('${category}')"]`).classList.add('active');
+            renderScholarships();
+        }
+
+        function goToCalendar() {
+            window.location.href = 'calendar.html';
+        }
+
+        renderScholarships();
+    </script>
+</body>
+</html>
