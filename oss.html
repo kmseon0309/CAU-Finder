@@ -100,7 +100,7 @@
     <nav>
       <ul>
         <li><a href="contest.html">Contest</a></li>
-        <li><a href="scholarship.html">Schoolarship</a></li>
+        <li><a href="scholarship.html">Scholarship</a></li>
         <li><a href="calendar.html">Calender</a></li>
       </ul>
     </nav>
@@ -114,18 +114,30 @@
       Easily search, save, and schedule opportunities—customized just for you.<br><br>
       Start exploring and shaping your future today! 🚀<br>
     </p>
-    <button onclick="showAlert()">Click Me</button>
+    <button onclick="showModal()">Click Me</button>
   </section>
-
-  <footer>
-    <p>&copy; 2024 CAU-Finer</p>
-  </footer>
-
+  
+  <div id="custom-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 30px; border-radius: 10px; text-align: center; max-width: 600px; width: 90%; height: auto;">
+      <img src="blockdiagram1.png" alt="Welcome Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+      <img src="blockdiagram2.png" alt="Welcome Image" style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+      <button onclick="closeModal()" style="margin-top: 20px; padding: 15px 30px; font-size: 1.2rem; background: #0077b6; color: white; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+    </div>
+  </div>  
+  
   <script>
-    function showAlert() {
-        alert('Hello, welcome to the CAU Finder!');
+    function showModal() {
+      document.getElementById('custom-modal').style.display = 'flex';
+    }
+  
+    function closeModal() {
+      document.getElementById('custom-modal').style.display = 'none';
     }
   </script>
+
+  <footer>
+      <p>&copy; 2024 CAU-Finer</p>
+  </footer>
 </body>
 
 </html>
