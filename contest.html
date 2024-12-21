@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <title>공모전 목록</title>
+    <title>Contest</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }    
+        body {
+            background-color: #f0f8ff;
         }
 
         header {
@@ -42,100 +46,110 @@
             text-decoration: underline;
         }
         
-      .contest-list {
-          max-width: 1000px;
-          margin: auto;
-      }
-      .contest-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px;
-          margin-bottom: 15px;
-          background-color: white;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          font-size: 18px;
-      }
+        .contest-list {
+            max-width: 1000px;
+            margin: auto;
+        }
+        .contest-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+        }
 
-      .button-group {
-          display: flex;
-          gap: 10px;
-      }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
 
-      .add-button, .apply-button {
-          font-size: 16px;
-          padding: 10px 15px;
-          border-radius: 6px;
-          cursor: pointer;
-      }
+        .add-button, .apply-button {
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-      .add-button {
-          background-color: #007bff;
-          color: white;
-          border: none;
-      }
+        .add-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
 
-      .apply-button {
-          background-color: #0056b3;
-          color: white;
-          border: none;
-      }
+        .apply-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+        }
 
-      .category-button {
-          font-size: 16px;
-          padding: 8px 8px;
-          border-radius: 6px;
-          cursor: pointer;
-          margin-right: 8px;
-      }
-    
-      .category-button.active {
-          background-color: #0056b3;
-          color: white;
-      }
+        .category-button {
+            font-size: 16px;
+            padding: 8px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+        
+        .category-button.active {
+            background-color: #0056b3;
+            color: white;
+        }
 
-      button, a {
-          transition: all 0.3s ease;
-      }
+        button, a {
+            transition: all 0.3s ease;
+        }
 
-      button:hover, a:hover {
-          opacity: 0.9;
-      }
+        button:hover, a:hover {
+            opacity: 0.9;
+        }
 
-      section {
-        background-color: #cbe2ff;
-        padding: 30px;
-        text-align: center;
-        margin-bottom: 30px;
-        margin-top: 10px
-      }
+        section {
+            background-color: #cbe2ff;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 10px
+        }
+
+        footer {
+            background-color: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 50px;
+        }
     </style>
 </head>
+
+
 <body>
     <header>
         <div class="logo">
-            <h1><a href="oss.html"; style="color: white; text-decoration: none;">CAU어쩌고</a></h1>
+            <h1><a href="oss.html"; style="color: white; text-decoration: none;">CAU Finder</a></h1>
         </div>
         <nav>
           <ul>
-            <li><a href="contest.html">공모전</a></li>
-            <li><a href="scholarship.html">장학금</a></li>
-            <li><a href="calendar.html">캘린더</a></li>
+            <li><a href="contest.html">Contest</a></li>
+            <li><a href="scholarship.html">Scolarship</a></li>
+            <li><a href="calendar.html">Calender</a></li>
           </ul>
         </nav>
     </header>
 
     <section>
-        <h1>공모전 목록</h1>
-        <button class="category-button active" onclick="filterContests('all')">통합</button>
-        <button class="category-button" onclick="filterContests('seoul')">서울</button>
-        <button class="category-button" onclick="filterContests('davinci')">다빈치</button>
+        <h1>Contest</h1><br>
+        <button class="category-button active" onclick="filterContests('all')">All</button>
+        <button class="category-button" onclick="filterContests('seoul')">Seoul</button>
+        <button class="category-button" onclick="filterContests('davinci')">Davinci</button>
     </section>
 
     <div class="contest-list" id="contestList"></div>
     <p style="text-align: right; margin-right: 450px;">
-        <button onclick="goToCalendar()">달력 보기</button>
+        <button onclick="goToCalendar()">Calender</button>
     </p>
 
     <script>
@@ -180,7 +194,7 @@
 
                 const deadlineContainer = document.createElement('div');
                 deadlineContainer.style.fontSize = '20px';
-                deadlineContainer.textContent = `(마감일: ${contest.deadline})`;
+                deadlineContainer.textContent = `(Deadline: ${contest.deadline})`;
 
                 const textContainer = document.createElement('div');
                 textContainer.appendChild(nameContainer);
@@ -190,7 +204,7 @@
                 buttonGroup.classList.add('button-group');
 
                 const addButton = document.createElement('button');
-                addButton.textContent = savedContests.some(c => c.name === contest.name) ? "제외" : "추가";
+                addButton.textContent = savedContests.some(c => c.name === contest.name) ? "Cancel" : "Add";
                 addButton.classList.add('add-button');
                 addButton.onclick = () => toggleContest(index);
 
@@ -198,7 +212,7 @@
                 applyButton.href = contest.applyLink;
                 applyButton.target = "_blank";
                 applyButton.classList.add('apply-button');
-                applyButton.textContent = "신청하기";
+                applyButton.textContent = "Apply";
 
                 buttonGroup.appendChild(applyButton);
                 buttonGroup.appendChild(addButton);
@@ -238,5 +252,10 @@
 
         renderContests();
     </script>
+
+    <footer>
+        <p>&copy; 2024 CAU-Finer</p>
+    </footer>
 </body>
+
 </html>

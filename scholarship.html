@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장학금 목록</title>
+    <title>Scholarship</title>
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f0f8ff;
         }
 
         header {
@@ -44,100 +48,111 @@
             text-decoration: underline;
         }
 
-      .scholarship-list {
-          max-width: 1000px;
-          margin: auto;
-      }
-      .scholarship-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px;
-          margin-bottom: 15px;
-          background-color: white;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          font-size: 18px;
-      }
+        .scholarship-list {
+            max-width: 1000px;
+            margin: auto;
+        }
 
-      .button-group {
-          display: flex;
-          gap: 10px;
-      }
+        .scholarship-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+        }
 
-      .add-button, .apply-button {
-          font-size: 16px;
-          padding: 10px 15px;
-          border-radius: 6px;
-          cursor: pointer;
-      }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
 
-      .add-button {
-          background-color: #007bff;
-          color: white;
-          border: none;
-      }
+        .add-button, .apply-button {
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-      .apply-button {
-          background-color: #0056b3;
-          color: white;
-          border: none;
-      }
+        .add-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
 
-      .category-button {
-          font-size: 16px;
-          padding: 8px 8px;
-          border-radius: 6px;
-          cursor: pointer;
-          margin-right: 8px;
-      }
-    
-      .category-button.active {
-          background-color: #0056b3;
-          color: white
-      }
+        .apply-button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+        }
 
-      button, a {
-          transition: all 0.3s ease;
-      }
+        .category-button {
+            font-size: 16px;
+            padding: 8px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+        
+        .category-button.active {
+            background-color: #0056b3;
+            color: white
+        }
 
-      button:hover, a:hover {
-          opacity: 0.9;
-      }
+        button, a {
+            transition: all 0.3s ease;
+        }
 
-      section {
-        background-color: #cbe2ff;
-        padding: 30px;
-        text-align: center;
-        margin-bottom: 30px;
-        margin-top:10px;
-      }
+        button:hover, a:hover {
+            opacity: 0.9;
+        }
+
+        section {
+            background-color: #cbe2ff;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top:10px;
+        }
+
+        footer {
+            background-color: #0077b6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 50px;
+        }
     </style>
 </head>
+
+
 <body>
     <header>
         <div class="logo">
-          <h1><a href="oss.html"; style="color: white; text-decoration: none;">CAU어쩌고</a></h1>
+          <h1><a href="oss.html"; style="color: white; text-decoration: none;">CAU Finder</a></h1>
         </div>
         <nav>
           <ul>
-            <li><a href="contest.html">공모전</a></li>
-            <li><a href="scholarship.html">장학금</a></li>
-            <li><a href="calendar.html">캘린더</a></li>
+            <li><a href="contest.html">Contest</a></li>
+            <li><a href="scholarship.html">Scholarship</a></li>
+            <li><a href="calendar.html">Calendar</a></li>
           </ul>
         </nav>
     </header>
 
     <section>
-        <h1>장학금 목록</h1>
-        <button class="category-button active" onclick="filterScholarships('all')">통합</button>
-        <button class="category-button" onclick="filterScholarships('seoul')">서울</button>
-        <button class="category-button" onclick="filterScholarships('davinci')">다빈치</button>
+        <h1>Scholarship</h1><br>
+        <button class="category-button active" onclick="filterScholarships('all')">All</button>
+        <button class="category-button" onclick="filterScholarships('seoul')">Seoul</button>
+        <button class="category-button" onclick="filterScholarships('davinci')">Davinci</button>
     </section>
 
     <div class="scholarship-list" id="scholarshipList"></div>
     <p style="text-align: right; margin-right: 450px;">
-        <button onclick="goToCalendar()">달력 보기</button>
+        <button onclick="goToCalendar()">Calendar</button>
     </p>
 
     <script>
@@ -188,7 +203,7 @@
 
                 const ApplicationdateContainer = document.createElement('div');
                 ApplicationdateContainer.style.fontSize = '20px';
-                ApplicationdateContainer.textContent = `(신청일: ${scholarship.Applicationdate})`;
+                ApplicationdateContainer.textContent = `(Application Date: ${scholarship.Applicationdate})`;
 
                 const textContainer = document.createElement('div');
                 textContainer.appendChild(nameScholarship);
@@ -198,7 +213,7 @@
                 buttonGroup.classList.add('button-group');
 
                 const addButton = document.createElement('button');
-                addButton.textContent = savedScholarships.some(s => s.name === scholarship.name) ? "제외" : "추가";
+                addButton.textContent = savedScholarships.some(s => s.name === scholarship.name) ? "Cancel" : "Add";
                 addButton.classList.add('add-button');
                 addButton.onclick = () => toggleScholarship(index);
 
@@ -206,7 +221,7 @@
                 applyButton.href = scholarship.applyLink;
                 applyButton.target = "_blank";
                 applyButton.classList.add('apply-button');
-                applyButton.textContent = "신청하기";
+                applyButton.textContent = "Apply";
 
                 buttonGroup.appendChild(applyButton);
                 buttonGroup.appendChild(addButton);
@@ -224,10 +239,10 @@
 
             if (savedIndex > -1) {
                 savedScholarships.splice(savedIndex, 1);
-                addButton.textContent = "추가";
+                addButton.textContent = "Add";
             } else {
                 savedScholarships.push(scholarship);
-                addButton.textContent = "제외";
+                addButton.textContent = "Cancel";
             }
 
             localStorage.setItem('selectedScholarships', JSON.stringify(savedScholarships));
@@ -250,5 +265,10 @@
 
         renderScholarships();
     </script>
+
+    <footer>
+        <p>&copy; 2024 CAU-Finer</p>
+    </footer>
 </body>
+
 </html>
