@@ -24,4 +24,4 @@ Ultimtely, this system will encourage students to actively participate in extrac
 </table>
 
 <h3>Implementation Video</h3>
-<a href='https://ifh.cc/v-OflaOQ' target='_blank'><video src='https://ifh.cc/v/OflaOQ.mp4' muted autoplay loop playsinline></a>
+<a href='https://ifh.cc/v-OflaOQ' target='_blank'></a>
