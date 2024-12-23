@@ -11,6 +11,7 @@ Ultimtely, this system will encourage students to actively participate in extrac
 
 <table>
   <tr>
-    <td><img alt="" src="https://ifh.cc/g/myGo8o.png" /></td><td><img alt="" src="https://ifh.cc/g/c4bYvO.png" /></td>
+    <td><img src="https://ifh.cc/g/myGo8o.png" /></td><td><img src="https://ifh.cc/g/c4bYvO.png" /></td>
   <tr>
 </table>
+
