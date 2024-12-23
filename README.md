@@ -1,5 +1,7 @@
 # CAU-Finder
-<h1>Intent of Software Development</h1>
+<h2>
+  Intent of Software Development
+</h2>
 <p>
   The primary intent of this software development project is to assist students in easily finding and managing information about school contests and scholarship programs. Currently, searching for such information is time-consuming and inconvenient, and it is particularly challenging to access comprehensive information categorized by campus and department. To address these issues, this software has been developed to enable students to access information quickly and accurately and to manage it efficiently.<br>
 The system provides both campus-specific and integrated information and allows users to save information of interest using a cart feature. Saved information is managed in a calendar format, enabling students to effectively track important deadlines and manage their schedules.<br>
