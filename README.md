@@ -9,4 +9,5 @@ This software aims to enhance the efficiency of information retrieval and helps 
 Ultimtely, this system will encourage students to actively participate in extracurricular activities and establish itself as a valuable tool that provides practical benefits.
 </p>
 
-<img src="D:\學校\대학교\2학기 term4\오픈소스프로그래밍\파이널\사진\KakaoTalk_20241221_195937045.png">
+<img src="https://ifh.cc/g/myGo8o.png">
+<img src="https://ifh.cc/g/c4bYvO.png">
