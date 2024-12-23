@@ -19,9 +19,9 @@ Ultimtely, this system will encourage students to actively participate in extrac
 <h3>Diagram</h3>
 <table>
   <tr>
-    <td><img src="https://ifh.cc/g/myGo8o.png" /></td><td><img src="https://ifh.cc/g/jNpLxy.png" /></td>
+    <td><img src="https://ifh.cc/g/Hhf6lP.png" /></td><td><img src="https://ifh.cc/g/jNpLxy.png" /></td>
   <tr>
 </table>
 
 <h3>Implementation Video</h3>
-<video src='https://ifh.cc/v/OflaOQ.mp4' muted autoplay loop playsinline></a>
+<video src="https://ifh.cc/v/OflaOQ.mp4">
