@@ -9,9 +9,19 @@ This software aims to enhance the efficiency of information retrieval and helps 
 Ultimtely, this system will encourage students to actively participate in extracurricular activities and establish itself as a valuable tool that provides practical benefits.
 </p>
 
+<h3>Project Outline</h3>
 <table>
   <tr>
     <td><img src="https://ifh.cc/g/myGo8o.png" /></td><td><img src="https://ifh.cc/g/c4bYvO.png" /></td>
   <tr>
 </table>
 
+<h3>Diagram</h3>
+<table>
+  <tr>
+    <td><img src="https://ifh.cc/g/myGo8o.png" /></td><td><img src="https://ifh.cc/g/jNpLxy.png" /></td>
+  <tr>
+</table>
+
+<h3>Implementation Video</h3>
+<video src='https://ifh.cc/v/OflaOQ.mp4' muted autoplay loop playsinline></a>
