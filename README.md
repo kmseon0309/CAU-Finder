@@ -22,6 +22,3 @@ Ultimtely, this system will encourage students to actively participate in extrac
     <td><img src="https://ifh.cc/g/Hhf6lP.png" /></td><td><img src="https://ifh.cc/g/jNpLxy.png" /></td>
   <tr>
 </table>
-
-<h3>Implementation Video</h3>
-<video src="https://ifh.cc/v/OflaOQ.mp4">
