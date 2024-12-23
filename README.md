@@ -8,3 +8,5 @@ The system provides both campus-specific and integrated information and allows u
 This software aims to enhance the efficiency of information retrieval and helps students seize opportunities for contests and scholarships. Additionally, it offers a user-friendly interface, allowing users to view contest and scholarship details for each campus at a glance.<br>
 Ultimtely, this system will encourage students to actively participate in extracurricular activities and establish itself as a valuable tool that provides practical benefits.
 </p>
+
+<img src="D:\學校\대학교\2학기 term4\오픈소스프로그래밍\파이널\사진\KakaoTalk_20241221_195937045.png">
