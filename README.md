@@ -24,4 +24,4 @@ Ultimtely, this system will encourage students to actively participate in extrac
 </table>
 
 <h3>Implementation Video</h3>
-<img src="https://ifh.cc/v/OflaOQ.mp4">
+<video src="https://ifh.cc/v/OflaOQ.mp4">
